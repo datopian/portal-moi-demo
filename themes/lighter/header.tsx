@@ -34,7 +34,7 @@ export default function LighterThemeHeader() {
           <span className="sr-only">Portal</span>
           {portalLogo ? (
             <Link href="/">
-              <Image src={portalLogo} alt="logo" height={50} width={160} style={{ objectFit: "contain" }} />
+              <Image src={portalLogo} alt="logo" height={67} width={213} style={{ objectFit: "contain" }} />
             </Link>
           ) : (
             <PortalDefaultLogo />
