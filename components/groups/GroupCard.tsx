@@ -7,7 +7,7 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 
 type GroupCardProps = Pick<
   Group,
-  "display_name" | "image_display_url" | "description" | "name"
+  "display_name" | "image_display_url" | "description" | "name" | "package_count"
 >;
 
 export default function GroupCard({
@@ -15,12 +15,13 @@ export default function GroupCard({
   image_display_url,
   description,
   name,
+  package_count,
 }: GroupCardProps) {
   const { theme } = useTheme();
   const url = image_display_url ? new URL(image_display_url) : undefined;
   return (
     <Link
-      href={`/groups/${name}`}
+      href={`/topics/${name}`}
       className={`bg-white hover:bg-accent-50 group border-b-[4px] border-white hover:border-accent p-8 col-span-3 rounded-lg block h-full text-accent  ${theme.styles.shadowSm}`}
     >
       <Image
@@ -39,13 +40,11 @@ export default function GroupCard({
         <h3 className="font-inter font-semibold text-lg mt-4 group-hover:text-accent">
           {display_name}
         </h3>
-        <p className="font-inter font-medium text-sm mt-1 mb-6 line-clamp-2">
-          {description}
-        </p>
+        <span className="text-xs text-gray-400 mt-1">
+          {package_count ?? 0} dataset{(package_count ?? 0) !== 1 ? "s" : ""}
+        </span>
       </div>
-      <span
-        className={` font-inter font-medium text-sm flex items-center gap-2`}
-      >
+      <span className="font-inter font-medium text-sm flex items-center gap-2 mt-6">
         View collection
         <ArrowRightIcon width={16} />
       </span>

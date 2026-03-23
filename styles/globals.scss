@@ -31,8 +31,14 @@ body {
   scroll-padding-top: 10vh;
 }
 
+.hero-glow {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 40%, rgba(146,114,42,0.11) 0%, rgba(146,114,42,0.04) 45%, #ffffff 70%),
+    radial-gradient(ellipse 55% 45% at 5% 95%, rgba(11,45,67,0.08) 0%, transparent 65%);
+}
+
 .custom-container {
-  width: min(1200px, 90%);
+  width: min(1400px, 95%);
   margin: 0 auto;
 }
 
@@ -136,4 +142,10 @@ snap-tabs {
 .vega-embed svg {
   display: block;
   max-width: 100%;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
 }

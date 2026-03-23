@@ -2,22 +2,20 @@ import { GetServerSideProps } from "next";
 import DatasetList from "../../components/_shared/DatasetList";
 import Layout from "../../components/_shared/Layout";
 import Tabs from "../../components/_shared/Tabs";
-import { CKAN } from "@portaljs/ckan";
 import styles from "@/styles/DatasetInfo.module.scss";
 import GroupNavCrumbs from "../../components/groups/individualPage/GroupNavCrumbs";
 import GroupInfo from "../../components/groups/individualPage/GroupInfo";
 import { getGroup } from "@/lib/queries/groups";
 import { searchDatasets } from "@/lib/queries/dataset";
 import HeroSection from "@/components/_shared/HeroSection";
-import { GroupIndividualPageStructuredData } from "@/components/schema/GroupIndividualPageStructuredData";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const groupName = context.params?.groupName;
-  if (!groupName) {
+  const topicName = context.params?.topicName;
+  if (!topicName) {
     return { notFound: true };
   }
   let group = await getGroup({
-    name: groupName as string,
+    name: topicName as string,
     include_datasets: false,
   });
   if (!group) {
@@ -46,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default function GroupPage({ group, initialDatasets }): JSX.Element {
+export default function TopicPage({ group, initialDatasets }): JSX.Element {
   const tabs = [
     {
       id: "datasets",
@@ -59,7 +57,6 @@ export default function GroupPage({ group, initialDatasets }): JSX.Element {
 
   return (
     <>
-      <GroupIndividualPageStructuredData group={group} />
       {group && (
         <Layout>
           <HeroSection title={group.title} cols="6" />
@@ -68,6 +65,7 @@ export default function GroupPage({ group, initialDatasets }): JSX.Element {
               name: group?.name,
               title: group?.title,
             }}
+            basePath="/topics"
           />
           <div className="grid grid-rows-datasetpage-hero mt-8">
             <section className="grid row-start-2 row-span-2 col-span-full">

@@ -25,54 +25,45 @@ export default function LighterThemeHeader() {
   }, [router.events]);
 
   return (
-    <header className="bg-transparent ">
+    <header className="bg-white border-b border-gray-100">
       <nav
         className={`mx-auto py-4 flex custom-container items-center justify-between  ${theme.styles.containerWide}`}
         aria-label="Global"
       >
-        <div className="flex items-center gap-x-12">
+        <div className="flex items-center">
           <span className="sr-only">Portal</span>
           {portalLogo ? (
             <Link href="/">
-              <Image src={portalLogo} alt="logo" height={67} width={213} style={{ objectFit: "contain" }} />
+              <Image src={portalLogo} alt="logo" height={50} width={160} style={{ objectFit: "contain" }} />
             </Link>
           ) : (
             <PortalDefaultLogo />
           )}
-
-          <div className="hidden lg:flex lg:gap-x-12">
-            <div className="flex gap-x-8 align-center">
-              <Link
-                href="/search"
-                className={`font-semibold my-auto ${
-                  router.pathname === "/search" ? "text-accent" : ""
-                }`}
-              >
-                SEARCH
-              </Link>
-              <Link
-                href="/organizations"
-                className={`font-semibold my-auto ${
-                  router.pathname === "/organizations" ? "text-accent" : ""
-                }`}
-              >
-                ORGANIZATIONS
-              </Link>
-              <Link
-                href="/groups"
-                className={`font-semibold my-auto ${
-                  router.pathname === "/groups" ? "text-accent" : ""
-                }`}
-              >
-                GROUPS
-              </Link>
-            </div>
-          </div>
         </div>
+
+        <div className="hidden lg:flex lg:gap-x-8 items-center">
+          <Link
+            href="/search"
+            className={`text-sm font-medium ${
+              router.pathname === "/search" ? "text-accent" : "text-gray-500 hover:text-gray-900"
+            }`}
+          >
+            Datasets
+          </Link>
+          <Link
+            href="/stories"
+            className={`text-sm font-medium ${
+              router.pathname === "/stories" ? "text-accent" : "text-gray-500 hover:text-gray-900"
+            }`}
+          >
+            Stories
+          </Link>
+        </div>
+
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 bg-white"
+            className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
@@ -110,14 +101,11 @@ export default function LighterThemeHeader() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6 flex flex-col">
-                <Link href="/search" className="font-semibold my-auto">
-                  DATASETS
+                <Link href="/search" className="text-sm font-medium text-gray-500">
+                  Datasets
                 </Link>
-                <Link href="/organizations" className="font-semibold my-auto">
-                  ORGS
-                </Link>
-                <Link href="/groups" className="font-semibold my-auto">
-                  GROUPS
+                <Link href="/stories" className="text-sm font-medium text-gray-500">
+                  Stories
                 </Link>
               </div>
             </div>

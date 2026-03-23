@@ -42,22 +42,6 @@ export default function DatasetSearchFilters() {
         )}
       </a>
       <div className={` ${showFilters ? "block" : "hidden"} lg:block`}>
-        <FacetCard title="Type">
-          <div className="text-[#5F5F5F] space-y-[10px]">
-            <DatasetTypeOption
-              title="Datasets"
-              Icon={CircleStackIcon}
-              type="dataset"
-              count={packageSearchResults?.count}
-            />
-            <DatasetTypeOption
-              title="Visualizations"
-              Icon={ChartBarIcon}
-              type="visualization"
-              count={visualizationsSearchResults?.count}
-            />
-          </div>
-        </FacetCard>
 
         <FacetCard
           title={

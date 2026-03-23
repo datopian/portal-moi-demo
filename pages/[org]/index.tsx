@@ -1,39 +1,30 @@
 import { GetServerSideProps } from "next";
-import Head from "next/head";
 import OrgNavCrumbs from "@/components/organization/individualPage/OrgNavCrumbs";
 import OrgInfo from "@/components/organization/individualPage/OrgInfo";
-import ActivityStream from "@/components/_shared/ActivityStream";
 import Layout from "@/components/_shared/Layout";
 import Tabs from "@/components/_shared/Tabs";
 import styles from "styles/DatasetInfo.module.scss";
 import DatasetList from "@/components/_shared/DatasetList";
-import { CKAN } from "@portaljs/ckan";
 import { getOrganization } from "@/lib/queries/orgs";
-import { getDataset } from "@/lib/queries/dataset";
 import { searchDatasets } from "@/lib/queries/dataset";
-
 import HeroSection from "@/components/_shared/HeroSection";
 import { OrganizationIndividualPageStructuredData } from "@/components/schema/OrganizationIndividualPageStructuredData";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const DMS = process.env.NEXT_PUBLIC_DMS;
-  const ckan = new CKAN(DMS);
   let orgName = context.params?.org as string;
   if (!orgName || !orgName.startsWith("@")) {
-    return {
-      notFound: true,
-    };
+    return { notFound: true };
   }
   orgName = orgName.split("@")[1];
-  let org = await getOrganization({
+  const org = await getOrganization({
     name: orgName as string,
     include_datasets: false,
   });
+  if (!org) {
+    return { notFound: true };
+  }
 
-  console.log("Fetched organization:", org);
-
-  let initialDatasets = null
-
+  let initialDatasets = null;
   if (org.package_count) {
     initialDatasets = await searchDatasets({
       fq: `owner_org:${org.id}`,
@@ -49,13 +40,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
   }
 
-  const activityStream = await ckan.getOrgActivityStream(org.name);
-  if (!org) {
-    return {
-      notFound: true,
-    };
-  }
-  org = { ...org, activity_stream: activityStream};
   return {
     props: {
       org,
@@ -73,16 +57,8 @@ export default function OrgPage({ org, initialDatasets }): JSX.Element {
       ),
       title: "Datasets",
     },
-    {
-      id: "activity-stream",  
-      content: (
-        <ActivityStream
-          activities={org?.activity_stream ? org.activity_stream : []}
-        />
-      ),
-      title: "Activity Stream",
-    },
   ];
+
   return (
     <>
       <OrganizationIndividualPageStructuredData org={org} />
