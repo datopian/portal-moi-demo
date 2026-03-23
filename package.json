@@ -15,7 +15,8 @@
     "generate:routes": "node scripts/generate-routes.js",
     "test:e2e": "playwright test",
     "test:pa11y": "node scripts/run-pa11y-from-routes.js",
-    "test:lhci": "node scripts/run-lhci-from-routes.js"
+    "test:lhci": "node scripts/run-lhci-from-routes.js",
+    "generate-covers": "tsx scripts/generate-covers.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.1",
