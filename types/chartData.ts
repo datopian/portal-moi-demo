@@ -20,3 +20,8 @@ export interface ChartData {
   topTradePartners: TradePartner[];
   govtFinance: GovtFinancePoint[];
 }
+
+export type PlotModule = typeof import("@observablehq/plot") & {
+  width?: number;
+  document?: Document;
+};

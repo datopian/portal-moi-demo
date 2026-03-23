@@ -1,13 +1,11 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import type { ChartData } from "@/types/chartData";
+import type { ChartData, PlotModule } from "@/types/chartData";
 
 const PlotChart = dynamic(() => import("./PlotChart"), { ssr: false });
 
 const ACCENT = "#92722a";
 const ACCENT_LIGHT = "#c9a96e";
-
-type PlotModule = typeof import("@observablehq/plot") & { width?: number };
 
 const CHARTS: {
   title: string;
