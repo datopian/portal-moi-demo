@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
@@ -8,14 +6,29 @@ import Chart from "@/components/stories/Chart";
 import { getAllStories, getStorySource, type StoryMeta } from "@/lib/stories";
 import Link from "next/link";
 
-// Import all cover modules statically so functions are available at render time
-// (functions cannot be serialized through getStaticProps JSON)
 import * as beyondOilCovers from "../../content/stories/beyond-oil.cover";
 import * as worldComesCovers from "../../content/stories/the-world-comes-to-uae.cover";
 
-const COVER_MODULES: Record<string, Record<string, unknown>> = {
-  "beyond-oil": beyondOilCovers as Record<string, unknown>,
-  "the-world-comes-to-uae": worldComesCovers as Record<string, unknown>,
+// MDX v3 strips JSX props that reference undeclared variables at compile time,
+// so scope injection does not work. Instead, we pass story-specific chart
+// components via the `components` prop, which MDX properly supports.
+const STORY_COMPONENTS: Record<string, Record<string, React.FC<{ title?: string }>>> = {
+  "beyond-oil": {
+    CoverChart: ({ title = "" }) => (
+      <Chart title={title} csvUrl={beyondOilCovers.coverCsvUrl} spec={beyondOilCovers.coverSpec} />
+    ),
+    HsSectionChart: ({ title = "" }) => (
+      <Chart title={title} csvUrl={beyondOilCovers.hsSectionCsvUrl} spec={beyondOilCovers.hsSectionSpec} />
+    ),
+  },
+  "the-world-comes-to-uae": {
+    CoverChart: ({ title = "" }) => (
+      <Chart title={title} csvUrl={worldComesCovers.coverCsvUrl} spec={worldComesCovers.coverSpec} />
+    ),
+    ImportsChart: ({ title = "" }) => (
+      <Chart title={title} csvUrl={worldComesCovers.importsCsvUrl} spec={worldComesCovers.importsSpec} />
+    ),
+  },
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -53,13 +66,12 @@ export default function StoryPage({
   frontmatter: StoryMeta;
   slug: string;
 }) {
-  const scope = COVER_MODULES[slug] ?? {};
+  const storyComponents = STORY_COMPONENTS[slug] ?? {};
 
   return (
     <Layout>
       <div className="custom-container mx-auto py-12">
         <div className="max-w-3xl mx-auto">
-          {/* Header */}
           <p className="text-sm text-gray-400 mb-3">{formatDate(frontmatter.date)}</p>
           <h1 className="text-4xl font-black text-gray-900 leading-tight mb-4">
             {frontmatter.title}
@@ -68,16 +80,10 @@ export default function StoryPage({
             {frontmatter.description}
           </p>
 
-          {/* Story body */}
           <article className="prose prose-gray max-w-none prose-headings:font-black prose-a:text-accent">
-            <MDXRemote
-              {...mdxSource}
-              components={{ Chart }}
-              scope={scope}
-            />
+            <MDXRemote {...mdxSource} components={storyComponents} />
           </article>
 
-          {/* Related datasets */}
           {frontmatter.relatedDatasets?.length > 0 && (
             <div className="mt-16 pt-8 border-t border-gray-100">
               <h2 className="text-lg font-bold text-gray-900 mb-4">Related Datasets</h2>
