@@ -36,7 +36,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString("en-US", {
+  const [year, month, day] = dateStr.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",

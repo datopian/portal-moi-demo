@@ -9,13 +9,13 @@ interface CoverModule {
   coverSpec: (Plot: typeof import("@observablehq/plot"), data: unknown[], document: Document) => SVGSVGElement | HTMLElement;
 }
 
-const COVERS_DIR = path.join(process.cwd(), "content/stories");
 const OUTPUT_DIR = path.join(process.cwd(), "public/images/story-covers");
 
 async function generateCover(slug: string, mod: CoverModule): Promise<void> {
   console.log(`Generating cover for: ${slug}`);
 
   const res = await fetch(mod.coverCsvUrl);
+  if (!res.ok) throw new Error(`Failed to fetch ${mod.coverCsvUrl}: ${res.status} ${res.statusText}`);
   const text = await res.text();
   const data = parseCsv(text);
 

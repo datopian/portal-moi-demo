@@ -1,10 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { StoryMeta } from "@/lib/stories";
 
 function formatDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  const [year, month] = dateStr.split("-").map(Number);
+  return new Date(year, month - 1, 1).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
 }
 
 export default function StoryCard({ story }: { story: StoryMeta }) {
