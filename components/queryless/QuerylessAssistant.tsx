@@ -245,7 +245,7 @@ export default function QuerylessAssistant() {
       id: "assistant-welcome",
       role: "assistant",
       content:
-        “Hi, I’m Queryless 👋\n\nAsk questions in plain English. No SQL needed.\n\nTry things like:\n- “What datasets are available about UAE trade?”\n- “Show me the top 10 non-oil export categories.”\n- “Which countries are the UAE’s biggest trade partners?”\n- “Create a chart of monthly imports over time.”\n\nI’m aware of the page you are browsing 👀”,
+        “Hi, I’m Queryless 👋\n\nAsk questions in plain English. No SQL needed.\n\nTry things like:\n- \”What datasets are available about UAE trade?\”\n- \”Show me the top 10 non-oil export categories.\”\n- \”Which countries are the UAE’s biggest trade partners?\”\n- \”Create a chart of monthly imports over time.\”\n\nI’m aware of the page you are browsing 👀”,
     },
   ]);
   const [input, setInput] = useState("");
@@ -656,7 +656,7 @@ export default function QuerylessAssistant() {
         id: "assistant-welcome",
         role: "assistant",
         content:
-          “Hi, I’m Queryless 👋\n\nAsk questions in plain English. No SQL needed.\n\nTry things like:\n- “What datasets are available about UAE trade?”\n- “Show me the top 10 non-oil export categories.”\n- “Which countries are the UAE’s biggest trade partners?”\n- “Create a chart of monthly imports over time.”\n\nI’m aware of the page you are browsing 👀”,
+          “Hi, I’m Queryless 👋\n\nAsk questions in plain English. No SQL needed.\n\nTry things like:\n- \”What datasets are available about UAE trade?\”\n- \”Show me the top 10 non-oil export categories.\”\n- \”Which countries are the UAE’s biggest trade partners?\”\n- \”Create a chart of monthly imports over time.\”\n\nI’m aware of the page you are browsing 👀”,
       },
       {
         id: contextMessageId,
