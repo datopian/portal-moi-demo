@@ -116,8 +116,8 @@ export default function Home({
     <>
       <HomePageStructuredData />
       <HeroSectionLight stats={stats} chartData={chartData} />
-      <ChartsSection data={chartData} />
       <FeaturedStoriesSection stories={stories} />
+      <ChartsSection data={chartData} />
       <MainSection groups={groups} />
     </>
   );
