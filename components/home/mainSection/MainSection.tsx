@@ -7,11 +7,14 @@ export default function MainSection({ groups }: { groups: Array<Group> }) {
   return (
     <section className="py-10">
       <div className="custom-container mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-black text-gray-900">Browse by Topic</h2>
+        <div className="flex items-start justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-black text-gray-900">Browse by Topic</h2>
+            <p className="mt-1 text-sm text-gray-500">Explore datasets organised by sector and theme.</p>
+          </div>
           <Link
             href="/topics"
-            className="text-sm font-semibold text-accent hover:text-accent-600 flex items-center gap-1 transition-colors"
+            className="text-sm font-semibold text-accent hover:text-accent-600 flex items-center gap-1 transition-colors shrink-0"
           >
             View all topics
             <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
