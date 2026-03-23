@@ -20,8 +20,9 @@ export default function Chart({ title, csvUrl, spec }: ChartProps) {
 
     async function render() {
       try {
+        const proxyUrl = `/api/csv?url=${encodeURIComponent(csvUrl)}`;
         const [res, Plot] = await Promise.all([
-          fetch(csvUrl),
+          fetch(proxyUrl),
           import("@observablehq/plot"),
         ]);
         const text = await res.text();
