@@ -126,7 +126,7 @@ const CHARTS: {
   {
     title: "Government Revenue vs Expense (AED Millions)",
     dataKey: "govtFinance",
-    href: "/@moi-demo/-government-financial-statistics-2025-sheet-1-government-financial-statistics",
+    href: "/@moi-demo/government-financial-statistics-2025-sheet-1-government-financial-statistics",
     period: "2025",
     frequency: "Quarterly",
     source: "UAE MoI",
