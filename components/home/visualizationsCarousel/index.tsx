@@ -140,7 +140,7 @@ const CHARTS: {
         marks: [
           Plot.ruleY([0], { stroke: "#e5e7eb" }),
           Plot.barY(data as { quarter: string; category: string; value: number }[], {
-            x: "quarter",
+            x: "category",
             y: "value",
             fill: "category",
             fx: "quarter",
