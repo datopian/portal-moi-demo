@@ -34,6 +34,7 @@ export const coverSpec = (Plot: PlotModule, data: unknown[], document?: Document
         y: (r) => r.value / 1e9,
         stroke: "#92722a",
         strokeWidth: 2,
+        tip: true,
       }),
     ],
     x: { label: "" },

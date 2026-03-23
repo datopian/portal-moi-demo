@@ -71,6 +71,7 @@ export const importsSpec = (Plot: PlotModule, data: unknown[], document?: Docume
         y: (r) => r.value / 1e9,
         stroke: "#c9a96e",
         strokeWidth: 2,
+        tip: true,
       }),
     ],
     x: { label: "" },
