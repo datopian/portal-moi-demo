@@ -28,7 +28,8 @@ export default function Chart({ title, csvUrl, spec }: ChartProps) {
         const text = await res.text();
         const data = parseCsv(text);
         if (cancelled) return;
-        const plot = spec(Plot as PlotModule, data);
+        const width = container.clientWidth || 640;
+        const plot = spec({ ...Plot, width } as PlotModule, data);
         container.innerHTML = "";
         container.appendChild(plot);
       } catch (e) {

@@ -18,6 +18,7 @@ export const coverSpec = (Plot: PlotModule, data: unknown[], document?: Document
 
   return Plot.plot({
     document,
+    width: Plot.width,
     height: 320,
     marginLeft: 130,
     marginBottom: 40,
@@ -53,6 +54,7 @@ export const importsSpec = (Plot: PlotModule, data: unknown[], document?: Docume
 
   return Plot.plot({
     document,
+    width: Plot.width,
     height: 320,
     marginLeft: 55,
     marginBottom: 40,
