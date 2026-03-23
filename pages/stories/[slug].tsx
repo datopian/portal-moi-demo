@@ -72,6 +72,13 @@ export default function StoryPage({
     <Layout>
       <div className="custom-container mx-auto py-12">
         <div className="max-w-3xl mx-auto">
+          <nav className="flex items-center gap-1.5 text-sm text-gray-400 mb-6">
+            <Link href="/" className="hover:text-gray-600 transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/stories" className="hover:text-gray-600 transition-colors">Stories</Link>
+            <span>/</span>
+            <span className="text-gray-600 truncate">{frontmatter.title}</span>
+          </nav>
           <p className="text-sm text-gray-400 mb-3">{formatDate(frontmatter.date)}</p>
           <h1 className="text-4xl font-black text-gray-900 leading-tight mb-4">
             {frontmatter.title}
