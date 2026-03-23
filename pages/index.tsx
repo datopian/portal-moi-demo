@@ -5,9 +5,11 @@ import { getAllGroups } from "@/lib/queries/groups";
 import { getAllOrganizations } from "@/lib/queries/orgs";
 import HeroSectionLight from "@/components/home/heroSectionLight";
 import ChartsSection from "@/components/home/visualizationsCarousel";
+import FeaturedStoriesSection from "@/components/home/FeaturedStoriesSection";
 import { HomePageStructuredData } from "@/components/schema/HomePageStructuredData";
 import type { ChartData, MonthlyPoint, TradePartner, GovtFinancePoint } from "@/types/chartData";
 import { parseRow, parseCsv } from "@/lib/parseCsv";
+import { getAllStories, type StoryMeta } from "@/lib/stories";
 
 async function fetchCsv(url: string): Promise<Record<string, string>[]> {
   const res = await fetch(url);
@@ -68,6 +70,8 @@ export async function getServerSideProps() {
     getAllOrganizations(),
   ]);
 
+  const stories = getAllStories();
+
   const stats = {
     datasetCount: datasets.count,
     groupCount: groups.length,
@@ -96,6 +100,7 @@ export async function getServerSideProps() {
       groups,
       stats,
       chartData,
+      stories,
     },
   };
 }
@@ -105,12 +110,14 @@ export default function Home({
   groups,
   stats,
   chartData,
-}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+  stories,
+}: InferGetServerSidePropsType<typeof getServerSideProps> & { stories: StoryMeta[] }): JSX.Element {
   return (
     <>
       <HomePageStructuredData />
       <HeroSectionLight stats={stats} chartData={chartData} />
-<ChartsSection data={chartData} />
+      <ChartsSection data={chartData} />
+      <FeaturedStoriesSection stories={stories} />
       <MainSection groups={groups} />
     </>
   );
